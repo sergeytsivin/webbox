@@ -17,28 +17,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     config.vm.provision :chef_solo do |chef|
         chef.log_level = "info"
-        chef.cookbooks_path = ["chef/site-cookbooks", "chef/cookbooks" ]
+        chef.cookbooks_path = ["site-cookbooks", "cookbooks" ]
         chef.add_recipe "apt"
         chef.add_recipe "timezone"
-        chef.add_recipe "nginx"
-        chef.add_recipe "php-fpm"
         chef.add_recipe "build-essential"
-        chef.add_recipe "rbc-haru"
-        chef.add_recipe "rbc-rbc6"
-        chef.add_recipe "rbc-rbc6::runtime_folder"
+        chef.add_recipe "node"
 
         # You may also specify custom JSON attributes:
         chef.json = {
             :tz => 'Europe/Moscow',
-            :user => {
-                :full_name => "Sergey Tsivin",
-                :email => "stsivin@rbc.ru",
-                :username => "stsivin",
-                :password => "****"
-            },
-            :rbc6 => {
-                :server_name => 'v6.rbc.vagrant'
-            }
         }
     end
 
